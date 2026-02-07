@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MathVerse | Komposisi & Invers</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #6366f1;
+            --secondary: #a855f7;
+            --bg: #f8fafc;
+            --text: #1e293b;
+            --card: #ffffff;
+            --success: #22c55e;
+            --danger: #ef4444;
+        }
+
+        [data-theme="dark"] {
+            --bg: #0f172a;
+            --text: #f1f5f9;
+            --card: #1e293b;
+            --primary: #818cf8;
+        }
+
+        * { box-sizing: border-box; transition: all 0.2s ease; }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--bg);
+            color: var(--text);
+            line-height: 1.6;
+            margin: 0;
+            padding: 0;
+        }
+
+        .navbar {
+            padding: 1rem 10%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: var(--card);
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .logo { 
+            font-weight: 800; 
+            font-size: 1.4rem; 
+            background: linear-gradient(45deg, var(--primary), var(--secondary));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .hero-section {
+            text-align: center;
+            padding: 4rem 1rem 3rem;
+            background: linear-gradient(135deg, rgba(99, 102, 241, 0.05), rgba(168, 85, 247, 0.05));
+        }
+
+        .hero-section h1 {
+            font-size: 2.8rem;
+            font-weight: 800;
+            margin: 0;
+            color: var(--text);
+        }
+
+        .hero-section p {
+            font-size: 1.1rem;
+            opacity: 0.7;
+            margin-top: 10px;
+        }
+
+        .container { max-width: 850px; margin: 0 auto; padding: 0 20px; }
+
+        .card {
+            background: var(--card);
+            border-radius: 20px;
+            padding: 2.5rem;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.05);
+            margin-bottom: 2rem;
+        }
+
+        h2 { border-bottom: 3px solid var(--primary); display: inline-block; margin-bottom: 1.5rem; }
+
+        .formula-box {
+            background: linear-gradient(135deg, rgba(99, 102, 241, 0.1), rgba(168, 85, 247, 0.1));
+            border-radius: 12px;
+            padding: 1.5rem;
+            margin: 1.5rem 0;
+            font-weight: 600;
+            text-align: center;
+            font-size: 1.25rem;
+            border: 1px dashed var(--primary);
+            color: var(--primary);
+        }
+
+        .step { background: rgba(0,0,0,0.03); padding: 12px 15px; border-left: 4px solid var(--secondary); margin: 10px 0; border-radius: 0 8px 8px 0; }
+
+        .btn-group { display: flex; gap: 15px; justify-content: center; margin: 2rem 0 4rem; }
+
+        .btn-main {
+            background: linear-gradient(45deg, var(--primary), var(--secondary));
+            color: white; border: none; padding: 15px 30px; border-radius: 12px;
+            font-weight: bold; cursor: pointer; font-size: 1rem;
+        }
+
+        .btn-main:hover { transform: translateY(-3px); box-shadow: 0 6px 20px rgba(99, 102, 241, 0.3); }
+
+        .option {
+            width: 100%; padding: 15px; margin: 10px 0; border: 2px solid #e2e8f0;
+            border-radius: 12px; background: transparent; color: var(--text);
+            cursor: pointer; text-align: left; font-size: 1rem;
+        }
+
+        .correct { background-color: var(--success) !important; color: white !important; border-color: var(--success) !important; }
+        .wrong { background-color: var(--danger) !important; color: white !important; border-color: var(--danger) !important; }
+
+        .mode-toggle { cursor: pointer; padding: 8px 15px; border-radius: 20px; border: 1px solid var(--primary); background: transparent; color: var(--text); font-weight: 600; }
+    </style>
+</head>
+<body>
+
+<nav class="navbar">
+    <div class="logo">MathVerse</div>
+    <button class="mode-toggle" onclick="toggleMode()" id="theme-btn">🌙 Mode Gelap</button>
+</nav>
+
+<div class="hero-section" id="hero">
+    <h1>Fungsi Komposisi & Invers</h1>
+    <p>Pembelajaran Interaktif Matematika</p>
+</div>
+
+<div class="container">
+    <div id="materi-page">
+        <div class="card">
+            <h2>1. Komposisi Fungsi (f o g)(x)</h2>
+            <p>Penggabungan dua fungsi sehingga menghasilkan fungsi baru. Nilai g(x) dimasukkan ke dalam f(x).</p>
+            <div class="formula-box">(f o g)(x) = f(g(x))</div>
+            
+            <p><strong>Contoh:</strong> f(x) = 2x, g(x) = x + 3</p>
+            <div class="step">Langkah 1: Tulis f(g(x))</div>
+            <div class="step">Langkah 2: Masukkan (x + 3) ke dalam x di f(x)</div>
+            <div class="step">Hasil: 2(x + 3) = 2x + 6</div>
+        </div>
+
+        <div class="card">
+            <h2>2. Fungsi Invers f-1(x)</h2>
+            <p>Invers adalah fungsi kebalikan. Mencari nilai asal dari sebuah hasil pemetaan.</p>
+            <div class="formula-box">y = f(x) ➔ x = f-1(y)</div>
+            
+            <p><strong>Trik Cepat Linear:</strong></p>
+            <div class="step">f(x) = ax + b ➔ f-1(x) = (x - b) / a</div>
+        </div>
+
+        <div class="btn-group">
+            <button class="btn-main" onclick="startQuiz('mudah')">🎮 Quiz Level Mudah</button>
+            <button class="btn-main" onclick="startQuiz('sulit')" style="background: #ef4444;">🔥 Quiz Level Sulit</button>
+        </div>
+    </div>
+
+    <div id="quiz-page" style="display: none;">
+        <div class="card">
+            <h3 id="quiz-title" style="color: var(--primary); margin: 0 0 10px 0;">Level: Mudah</h3>
+            <p id="progress" style="margin-bottom: 20px; font-weight: bold; opacity: 0.6;">Soal 1 dari 10</p>
+            <p id="question-text" style="font-size: 1.2rem; font-weight: 600;"></p>
+            <div id="options-box"></div>
+            <button id="next-btn" class="btn-main" style="display: none; width: 100%; margin-top: 20px;" onclick="nextQuestion()">Lanjut Soal</button>
+        </div>
+    </div>
+</div>
+
+<script>
+    const quizData = {
+        mudah: [
+            { q: "Jika f(x) = 3x, maka f(2) adalah...", a: ["5", "6", "3", "9"], c: 1 },
+            { q: "Invers dari f(x) = x + 5 adalah...", a: ["x - 5", "5x", "x + 5", "5 - x"], c: 0 },
+            { q: "Jika f(x) = 2x dan g(x) = x + 1, tentukan (f o g)(x)!", a: ["2x + 1", "2x + 2", "x + 2", "2x"], c: 1 },
+            { q: "Nilai f(x) = x - 3, maka f(10) adalah...", a: ["7", "13", "10", "3"], c: 0 },
+            { q: "Jika g(x) = 4x, maka g-1(x) adalah...", a: ["x - 4", "x / 4", "4 / x", "x + 4"], c: 1 },
+            { q: "Lambang bundaran pada komposisi fungsi adalah...", a: ["x", "+", "o", "/"], c: 2 },
+            { q: "Jika f(x) = x + 2, maka (f o f)(x) adalah...", a: ["x + 4", "x + 2", "2x + 2", "x + 8"], c: 0 },
+            { q: "Jika f(x) = 2x - 1, maka f(1) adalah...", a: ["0", "1", "2", "3"], c: 1 },
+            { q: "Invers dari f(x) = x adalah...", a: ["x", "-x", "1/x", "0"], c: 0 },
+            { q: "Jika f(x) = 10, maka f(5) adalah...", a: ["5", "10", "50", "0"], c: 1 }
+        ],
+        sulit: [
+            { q: "Jika f(x) = (2x+3)/(x-4), invers f-1(x) adalah...", a: ["(4x+3)/(x-2)", "(4x-3)/(x+2)", "(2x+4)/(x-3)", "x-4"], c: 0 },
+            { q: "Diketahui (f o g)(x) = 4x²+8x-3 dan g(x)=2x+4. f(x) = ...", a: ["x²-4x-3", "x²+4x-3", "x²-4x+9", "x²-3"], c: 2 },
+            { q: "Jika f(x) = √(x-2), invers f-1(x) adalah...", a: ["x²+2", "x²-2", "x+2", "2x"], c: 0 },
+            { q: "Nilai (g o f)-1(6) jika f(x)=x+1 dan g(x)=2x adalah...", a: ["2", "3", "4", "5"], c: 0 },
+            { q: "Jika f(x) = 3x-1 dan g(x) = 2x+5, maka (f o g)-1(x) = ...", a: ["(x-14)/6", "(x+14)/6", "(x-4)/6", "6x+14"], c: 0 },
+            { q: "Jika f(x) = x/(x-1), maka f-1(x) adalah...", a: ["x/(x-1)", "x/(x+1)", "(x-1)/x", "1/x"], c: 0 },
+            { q: "Jika (f o g)(x) = 2x+1 dan f(x) = x+3, maka g(x) = ...", a: ["2x-2", "2x+2", "2x-3", "x-2"], c: 0 },
+            { q: "Nilai f-1(2) jika f(x) = (3x+4)/(2x-1) adalah...", a: ["6", "1", "2", "0"], c: 0 },
+            { q: "Invers dari f(x) = 2 - 3x adalah...", a: ["(2-x)/3", "(x-2)/3", "(3-x)/2", "3x-2"], c: 0 },
+            { q: "Jika f(x)=2x, g(x)=x+1, h(x)=x², maka (h o g o f)(1) adalah...", a: ["9", "4", "16", "1"], c: 0 }
+        ]
+    };
+
+    let currentLvl = 'mudah';
+    let currentIdx = 0;
+    let score = 0;
+
+    function toggleMode() {
+        const body = document.body;
+        const btn = document.getElementById('theme-btn');
+        if (body.hasAttribute('data-theme')) {
+            body.removeAttribute('data-theme');
+            btn.innerText = "🌙 Mode Gelap";
+        } else {
+            body.setAttribute('data-theme', 'dark');
+            btn.innerText = "☀️ Mode Terang";
+        }
+    }
+
+    function startQuiz(lvl) {
+        currentLvl = lvl;
+        currentIdx = 0;
+        score = 0;
+        document.getElementById('materi-page').style.display = 'none';
+        document.getElementById('hero').style.display = 'none'; 
+        document.getElementById('quiz-page').style.display = 'block';
+        document.getElementById('quiz-title').innerText = "Level: " + (lvl === 'mudah' ? 'Mudah' : 'Sulit');
+        loadQuestion();
+    }
+
+    function loadQuestion() {
+        const data = quizData[currentLvl][currentIdx];
+        document.getElementById('progress').innerText = `Soal ${currentIdx + 1} dari 10`;
+        document.getElementById('question-text').innerText = data.q;
+        document.getElementById('next-btn').style.display = "none";
+        
+        const box = document.getElementById('options-box');
+        box.innerHTML = "";
+        
+        data.a.forEach((opt, i) => {
+            const btn = document.createElement('button');
+            btn.className = 'option';
+            btn.innerText = opt;
+            btn.onclick = () => checkAns(i, data.c, btn);
+            box.appendChild(btn);
+        });
+    }
+
+    function checkAns(selected, correct, btn) {
+        const options = document.querySelectorAll('.option');
+        options.forEach(b => b.disabled = true);
+        if(selected === correct) {
+            btn.classList.add('correct');
+            score++;
+        } else {
+            btn.classList.add('wrong');
+            options[correct].classList.add('correct');
+        }
+        document.getElementById('next-btn').style.display = "block";
+    }
+
+    function nextQuestion() {
+        currentIdx++;
+        if(currentIdx < 10) {
+            loadQuestion();
+        } else {
+            finish();
+        }
+    }
+
+    function finish() {
+        document.getElementById('quiz-page').innerHTML = `
+            <div class="card" style="text-align:center;">
+                <h2>Selesai!</h2>
+                <p>Skor Anda: <b>${score * 10} / 100</b></p>
+                <button class="btn-main" onclick="location.reload()">Kembali ke Materi</button>
+            </div>
+        `;
+    }
+</script>
+</body>
+</html># Fungsi-dan-Komposisi-Invers-Math-Kelas-11
